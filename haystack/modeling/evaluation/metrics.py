@@ -1,4 +1,4 @@
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Union
 
 import logging
 from functools import reduce
@@ -58,16 +58,27 @@ def acc_and_f1(preds, labels):
 
 
 def f1_macro(preds, labels):
+    """
+    Calculates the F1 metric for each label and finds their unweighted mean.
+
+    :param preds: list of predictions
+    :param labels: list of target labels
+    """
     return {"f1_macro": f1_score(y_true=labels, y_pred=preds, average="macro")}
 
 
 def pearson_and_spearman(preds, labels):
+    """Calculate the Pearson correlation coefficient and Spearman correlation coefficient.
+
+    :param preds: list of predictions
+    :param labels: list of target labels
+    """
     pearson_corr = pearsonr(preds, labels)[0]
     spearman_corr = spearmanr(preds, labels)[0]
     return {"pearson": pearson_corr, "spearman": spearman_corr, "corr": (pearson_corr + spearman_corr) / 2}
 
 
-def compute_metrics(metric: str, preds, labels):
+def compute_metrics(metric: Union[str, List], preds, labels):
     """
     Calculate the named metric values for the list of predictions vs list of labels.
 
@@ -140,7 +151,10 @@ def compute_report_metrics(head: PredictionHead, preds, labels):
 
 def squad_EM(preds, labels):
     """
-    Count how often the pair of first predicted start and end index exactly matches one of the labels
+    Count how often the pair of first predicted start and end index exactly matches one of the labels.
+
+    :param preds: list of predictions
+    :param labels: list of target labels
     """
     n_docs = len(preds)
     n_correct = 0
@@ -264,13 +278,16 @@ def metrics_per_bin(preds, labels, num_bins: int = 10):
 def squad_base(preds, labels):
     em = squad_EM(preds=preds, labels=labels)
     f1 = squad_f1(preds=preds, labels=labels)
-    top_acc = top_n_accuracy(preds=preds, labels=labels)
-    return {"EM": em, "f1": f1, "top_n_accuracy": top_acc}
+    top_n_acc = top_n_accuracy(preds=preds, labels=labels)
+    return {"EM": em, "f1": f1, "top_n_accuracy": top_n_acc}
 
 
 def squad(preds, labels):
     """
-    This method calculates squad evaluation metrics a) overall, b) for questions with text answer and c) for questions with no answer
+    This method calculates squad evaluation metrics a) overall, b) for questions with text answer and c) for questions with no answer.
+
+    :param preds: list of predictions
+    :param labels: list of target labels
     """
     # TODO change check for no_answer questions from using (start,end)==(-1,-1) to is_impossible flag in QAInput. This needs to be done for labels though. Not for predictions.
     overall_results = squad_base(preds, labels)
@@ -304,10 +321,14 @@ def squad(preds, labels):
 
 def top_n_accuracy(preds, labels):
     """
-    This method calculates the percentage of documents for which the model makes top n accurate predictions.
-    The definition of top n accurate a top n accurate prediction is as follows:
-    For any given question document pair, there can be multiple predictions from the model and multiple labels.
-    If any of those predictions overlap at all with any of the labels, those predictions are considered to be top n accurate.
+    This method calculates the percentage of documents for which the model makes top-n-accurate predictions.
+    The definition of a top-n-accurate prediction is as follows:
+        For any given question document pair, there can be multiple predictions from the model and multiple labels.
+        If any of the top-n-predictions positionally overlap with any of the labels, those predictions are considered
+        to be top-n-accurate.
+
+    :param preds: list of predictions
+    :param labels: list of target labels
     """
     answer_in_top_n = []
     n_questions = len(preds)

@@ -23,7 +23,7 @@ class Evaluator:
     def __init__(self, data_loader: torch.utils.data.DataLoader, tasks, device: torch.device, report: bool = True):
         """
         :param data_loader: The PyTorch DataLoader that will return batches of data from the evaluation dataset
-        :param tesks:
+        :param tasks:
         :param device: The device on which the tensors should be processed. Choose from torch.device("cpu") and torch.device("cuda").
         :param report: Whether an eval report should be generated (e.g. classification report per class).
         """
