@@ -346,7 +346,7 @@ def _init_amp(model, device, optimizer=None, use_amp=None):
             model, optimizer = amp.initialize(model, optimizer, opt_level=use_amp)
         else:
             logger.warning(
-                f"Can't find AMP although you specificed to use amp with level {use_amp}. Will continue without AMP ..."
+                f"Can't find AMP although you specified to use amp with level {use_amp}. Will continue without AMP ..."
             )
 
     return model, optimizer

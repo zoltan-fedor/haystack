@@ -25,6 +25,7 @@ def eval_data_from_json(
 
     :param filename: Path to file in SQuAD format
     :param max_docs: This sets the number of documents that will be loaded. By default, this is set to None, thus reading in all available eval documents.
+    :param preprocessor: Optional PreProcessor to preprocess evaluation documents.
     :param open_domain: Set this to True if your file is an open domain dataset where two different answers to the same question might be found in different contexts.
     """
     docs: List[Document] = []
@@ -71,7 +72,9 @@ def eval_data_from_jsonl(
     If batch_size is set to None, this method will yield all documents and labels.
 
     :param filename: Path to file in SQuAD format
+    :param batch_size: Optional number of documents that are loaded and processed at a time.
     :param max_docs: This sets the number of documents that will be loaded. By default, this is set to None, thus reading in all available eval documents.
+    :param preprocessor: Optional PreProcessor to preprocess evaluation documents.
     :param open_domain: Set this to True if your file is an open domain dataset where two different answers to the same question might be found in different contexts.
     """
     docs: List[Document] = []
