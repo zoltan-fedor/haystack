@@ -5057,6 +5057,7 @@ Document and Labels can then be indexed to the DocumentStore and be used for eva
 
 - `filename`: Path to file in SQuAD format
 - `max_docs`: This sets the number of documents that will be loaded. By default, this is set to None, thus reading in all available eval documents.
+- `preprocessor`: Optional PreProcessor to preprocess evaluation documents.
 - `open_domain`: Set this to True if your file is an open domain dataset where two different answers to the same question might be found in different contexts.
 
 <a id="utils.eval_data_from_jsonl"></a>
@@ -5078,7 +5079,9 @@ If batch_size is set to None, this method will yield all documents and labels.
 **Arguments**:
 
 - `filename`: Path to file in SQuAD format
+- `batch_size`: Optional number of documents that are loaded and processed at a time.
 - `max_docs`: This sets the number of documents that will be loaded. By default, this is set to None, thus reading in all available eval documents.
+- `preprocessor`: Optional PreProcessor to preprocess evaluation documents.
 - `open_domain`: Set this to True if your file is an open domain dataset where two different answers to the same question might be found in different contexts.
 
 <a id="utils.squad_json_to_jsonl"></a>
