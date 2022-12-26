@@ -79,7 +79,7 @@ class _AsyncRayDeploymentWrapper(_RayDeploymentWrapper):
         """
         Ray calls this method which is then re-directed to the corresponding component's run().
         """
-        return await self._dispatch_run_general(self.node.run, *args, **kwargs)
+        return await self._dispatch_run_general(self.node.run_async, *args, **kwargs)
 
     # this is an async version fo the `nodes/base.py::_dispatch_run_general` method
     async def _dispatch_run_general(self, run_method: Callable, **kwargs):
