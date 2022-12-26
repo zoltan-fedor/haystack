@@ -296,7 +296,7 @@ class _RayDeploymentWrapper:
         """
         Ray calls this method which is then re-directed to the corresponding component's run().
         """
-        return self.node._dispatch_run(*args, **kwargs)
+        return self.node._dispatch_run(self.node.run, *args, **kwargs)
 
     @staticmethod
     def load_from_pipeline_config(pipeline_config: dict, component_name: str):
