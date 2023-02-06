@@ -459,10 +459,16 @@ class _RayDeploymentWrapper:
             if value in all_component_names:  # check if the param value is a reference to another component
                 component_params[key] = _RayDeploymentWrapper.load_from_pipeline_config(pipeline_config, value)
 
-        if component_name == "table-gate-emp":
-            import custom_nodes
+        # if component_name == "table-gate-emp":
+        #     import custom_nodes
 
-            # from table_gate import TableGate
+        # from table_gate import TableGate
+        if "custom_component_package" in component_params:
+            # import the module, same as `import [module_name]`
+            # __import__(component_params['custom_component_package'])
+            import importlib
+
+            _module = importlib.import_module(component_params["custom_component_package"], package=None)
 
         component_instance = BaseComponent._create_instance(
             component_type=component_config["type"], component_params=component_params, name=component_name
