@@ -459,6 +459,9 @@ class _RayDeploymentWrapper:
             if value in all_component_names:  # check if the param value is a reference to another component
                 component_params[key] = _RayDeploymentWrapper.load_from_pipeline_config(pipeline_config, value)
 
+        from time import sleep
+
+        sleep(60)
         if component_name == "TableGate":
             import custom_nodes
 
