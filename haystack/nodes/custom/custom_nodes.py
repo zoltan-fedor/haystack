@@ -1,6 +1,5 @@
 from haystack.nodes.base import BaseComponent
 from haystack.schema import Document
-from time import sleep
 from typing import Any, List, Optional, Union
 
 

@@ -48,7 +48,7 @@ from haystack.nodes.retriever import (
 from haystack.nodes.summarizer import BaseSummarizer, TransformersSummarizer
 from haystack.nodes.translator import BaseTranslator, TransformersTranslator
 
-from haystack.nodes.custom import TableGate, PromptBuilder
+# from haystack.nodes.custom import TableGate, PromptBuilder
 
 Crawler = safe_import("haystack.nodes.connector.crawler", "Crawler", "crawler")  # Has optional dependencies
 AnswerToSpeech = safe_import(
