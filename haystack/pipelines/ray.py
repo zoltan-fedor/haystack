@@ -459,7 +459,7 @@ class _RayDeploymentWrapper:
             if value in all_component_names:  # check if the param value is a reference to another component
                 component_params[key] = _RayDeploymentWrapper.load_from_pipeline_config(pipeline_config, value)
 
-        if component_config["type"].startswith("Custom"):
+        if component_name == "table-gate-emp":
             import custom_nodes
 
         component_instance = BaseComponent._create_instance(
