@@ -22,6 +22,8 @@ from haystack.nodes.base import BaseComponent
 from haystack.pipelines.base import Pipeline
 from haystack.environment import set_pytorch_secure_model_loading
 
+import custom_nodes
+
 
 pd.options.display.max_colwidth = 80
 set_pytorch_secure_model_loading()
