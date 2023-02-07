@@ -107,7 +107,11 @@ class RayPipeline(Pipeline):
             if pipeline.root_node is None:
                 root_node = node_config["inputs"][0]
                 if root_node in ["Query", "File"]:
-                    handle = cls._create_ray_deployment(component_name=root_node, pipeline_config=pipeline_config)
+                    handle = cls._create_ray_deployment(
+                        component_name=root_node,
+                        pipeline_config=pipeline_config,
+                        serve_deployment_kwargs={"version": "default"},
+                    )
                     pipeline._add_ray_deployment_in_graph(handle=handle, name=root_node, outgoing_edges=1, inputs=[])
                 else:
                     raise KeyError(f"Root node '{root_node}' is invalid. Available options are 'Query' and 'File'.")
