@@ -298,6 +298,7 @@ class HFLocalInvocationLayer(PromptModelInvocationLayer):
             ]
             if key in kwargs
         }
+        print(f"Model input kwargs: {model_input_kwargs}")
         # flatten model_kwargs one level
         if "model_kwargs" in model_input_kwargs:
             mkwargs = model_input_kwargs.pop("model_kwargs")
@@ -317,8 +318,10 @@ class HFLocalInvocationLayer(PromptModelInvocationLayer):
                 raise ValueError(f"Invalid torch_dtype value {torch_dtype}")
             model_input_kwargs["torch_dtype"] = torch_dtype_resolved
 
+        print("a1")
         if len(model_input_kwargs) > 0:
             logger.info("Using model input kwargs %s in %s", model_input_kwargs, self.__class__.__name__)
+            print("Using model input kwargs %s in %s", model_input_kwargs, self.__class__.__name__)
 
         self.pipe = pipeline(
             "text2text-generation",
