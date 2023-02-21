@@ -365,7 +365,8 @@ class HFLocalInvocationLayer(PromptModelInvocationLayer):
 
     @classmethod
     def supports(cls, model_name_or_path: str) -> bool:
-        if not all(m in model_name_or_path for m in ["google", "flan", "t5"]):
+        # if not all(m in model_name_or_path for m in ["google", "flan", "t5"]):
+        if not all(m in model_name_or_path for m in ["flan", "t5"]):
             return False
 
         try:
