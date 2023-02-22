@@ -371,13 +371,8 @@ class HFLocalInvocationLayer(PromptModelInvocationLayer):
 
         try:
             # if it is google flan t5, load it, we'll use it anyway and also check if model loads correctly
-            AutoModelForSeq2SeqLM.from_pretrained(
-                model_name_or_path,
-                low_cpu_mem_usage=True,
-                load_in_8bit=True,
-                torch_dtype=torch.float16,
-                device_map="auto",
-            )
+            # AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path)
+            return True
         except EnvironmentError:
             return False
         return True
